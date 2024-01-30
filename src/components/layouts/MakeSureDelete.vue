@@ -5,7 +5,7 @@
     </template>
     <template #footer>
       <div class="submit-actions">
-        <v-btn :style="{ marginRight: '1rem' }" @click="submit">Да</v-btn>
+        <v-btn class="mr-4" @click="submit">Да</v-btn>
         <v-btn @click="popupStore.closePopup()">Нет</v-btn>
       </div>
     </template>

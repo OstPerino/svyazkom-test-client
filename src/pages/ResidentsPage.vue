@@ -79,7 +79,7 @@ const onDeleteHandler = (resident: IResident) => {
 };
 
 const onEditHandler = (resident: IResident) => {
-	popupStore.showPopup(PopupType.updateResident);
+	popupStore.showPopup(PopupType.addResident);
 	residentsStore.setCurrentResident(resident);
 };
 

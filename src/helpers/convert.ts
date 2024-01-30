@@ -8,6 +8,7 @@ export interface IConvert {
 }
 
 export class Convert implements IConvert {
+
 	public snakeToCamel(str: any) {
 		return str.replace(/_([a-z])/g, function(match: any, letter: any) {
 			return letter.toUpperCase();

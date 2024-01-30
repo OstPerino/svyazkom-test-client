@@ -3,7 +3,6 @@ import {Nullable} from "@/types";
 
 export enum PopupType {
 	addResident = "addResident",
-	updateResident = "updateResident",
 	acceptDelete = "acceptDelete",
 	addBill = "addBill",
 	changeTariff = "changeTariff",
