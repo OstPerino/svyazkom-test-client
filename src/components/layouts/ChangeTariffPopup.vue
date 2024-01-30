@@ -7,9 +7,12 @@
       <v-text-field
           label="Цена за месяц"
           v-model.number="changeTariffState.amountRub"
+          :error-messages="amountRubError"
       />
       <v-date-picker
           v-model="changeTariffState.startDate"
+          :min="minDate"
+          max-height="430px"
       />
     </template>
     <template #footer>
@@ -21,20 +24,20 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive } from "vue";
+import { computed, reactive, watch } from "vue";
 import { useVuelidate } from "@vuelidate/core";
-import { required, numeric, } from "@vuelidate/validators";
+import { required, numeric, maxLength, minValue, maxValue } from "@vuelidate/validators";
 import { useToast } from "vue-toast-notification";
 import { usePopupStore } from "@/store/popup.store";
 import BasePopup from "@/components/base/BasePopup.vue";
 import TariffService from "@/api/tariff.service";
 import dayjs from "dayjs";
-import { useDate } from "vuetify";
-
-// TODO: Date picker validation (only first day of month from next month)
 
 const $toasts = useToast();
 const popupStore = usePopupStore();
+
+const currentDate = new Date();
+const minDate: string = dayjs(currentDate, "YYYY-MM-DD", "ru").format();
 
 const changeTariffState = reactive({
   amountRub: 0,
@@ -43,13 +46,31 @@ const changeTariffState = reactive({
 
 const rules = {
   startDate: { required },
-  amountRub: { required, numeric },
+  amountRub: { required, numeric, maxValue: maxValue(5000) },
 };
 
 const $v = useVuelidate(rules, changeTariffState);
 
 const isSubmitDisabled = computed(() => {
   return $v.value.$invalid;
+});
+
+const amountRubError = computed(() => {
+
+  switch (true) {
+  case $v.value.amountRub.maxValue.$invalid:
+    return ["Цена слишком высокая"];
+
+  case $v.value.amountRub.numeric.$invalid:
+    return ["Доступен ввод только цифр"];
+
+  case $v.value.amountRub.required.$invalid && $v.value.amountRub.$dirty:
+    return ["Обязательное поле"];
+
+  default:
+    return "";
+
+  }
 });
 
 const changeTariff = async () => {

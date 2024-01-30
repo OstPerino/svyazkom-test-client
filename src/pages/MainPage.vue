@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    Main
+    Главная страница приложения
   </div>
 </template>
 

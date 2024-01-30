@@ -5,7 +5,11 @@
     </template>
     <template #main>
       <v-text-field label="ФИО" v-model="residentState.fio"/>
-      <v-text-field label="Размер участка" v-model.number="residentState.area"/>
+      <v-text-field
+          :error-messages="residentAreaError"
+          label="Размер участка"
+          v-model.number="residentState.area"
+      />
     </template>
     <template #footer>
       <v-btn :disabled="isSubmitDisabled" @click="residentAction">
@@ -20,7 +24,7 @@ import { computed, onMounted, reactive } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import { usePopupStore } from "@/store/popup.store";
 import { useResidentStore } from "@/store/resident.store";
-import { required, numeric } from "@vuelidate/validators";
+import { required, numeric, maxLength, maxValue } from "@vuelidate/validators";
 import BasePopup from "@/components/base/BasePopup.vue";
 
 const residentStore = useResidentStore();
@@ -32,14 +36,25 @@ const residentState = reactive({
 });
 
 const rules = {
-  fio: { required },
-  area: { required, numeric },
+  fio: { required, maxLength: maxLength(50) },
+  area: { required, numeric, maxValue: maxValue(3000) },
 };
 
 const $v = useVuelidate(rules, residentState);
 
 const isSubmitDisabled = computed(() => {
   return $v.value.$invalid;
+});
+
+const residentAreaError = computed(() => {
+  switch (true) {
+  case $v.value.area.maxValue.$invalid:
+    return ["Слишком большой участок"];
+  case $v.value.area.required.$invalid && $v.value.area.$dirty:
+    return ["Обязательное поле"];
+  default:
+    return "";
+  }
 });
 
 const createResident = async () => {
