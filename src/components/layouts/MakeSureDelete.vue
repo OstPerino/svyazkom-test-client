@@ -13,17 +13,17 @@
 </template>
 
 <script setup lang="ts">
-import {usePopupStore} from "@/store/popup.store";
-import {useResidentStore} from "@/store/resident.store";
+import { usePopupStore } from "@/store/popup.store";
+import { useResidentStore } from "@/store/resident.store";
 import BasePopup from "@/components/base/BasePopup.vue";
 
 const popupStore = usePopupStore();
 const residentStore = useResidentStore();
 
 const submit = () => {
-	const residentId = residentStore.currentResident?.id;
-	residentStore.deleteResident(residentId);
-	popupStore.closePopup();
+  const residentId = residentStore.currentResident?.id;
+  residentStore.deleteResident(residentId);
+  popupStore.closePopup();
 };
 </script>
 

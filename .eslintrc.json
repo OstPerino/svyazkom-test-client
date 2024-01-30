@@ -22,9 +22,11 @@
         "@typescript-eslint/no-unused-vars": "warn",
         "no-prototype-builtins": "warn",
         "vue/valid-v-slot": "warn",
+        "@typescript-eslint/ban-ts-comment": "warn",
+        "object-curly-spacing": ["error", "always"],
         "indent": [
             "error",
-            "tab"
+            2
         ],
         "linebreak-style": [
             "error",

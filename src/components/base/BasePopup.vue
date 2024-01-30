@@ -1,5 +1,5 @@
 <template>
-  <div class="base-popup">
+  <div class="base-popup" ref="popupContainer">
     <div class="base-popup-header">
       <h3 class="base-popup-header-text"><slot name="header"/></h3>
       <v-btn size="small" icon="$close" @click="onClose"/>
@@ -14,13 +14,22 @@
 </template>
 
 <script setup lang="ts">
-import {usePopupStore} from "@/store/popup.store";
+import { ref } from "vue";
+import { usePopupStore } from "@/store/popup.store";
+// import {onClickOutside} from "@vueuse/core/index";
+
+// const popupContainer = ref<null>(null);
 
 const popupStore = usePopupStore();
 
 const onClose = () => {
-	popupStore.closePopup();
+  popupStore.closePopup();
 };
+
+// Outside click will not work with dropdown inside popup cause layer is outside popup
+// onClickOutside(popupContainer, (event: PointerEvent) => {
+// 	popupStore.closePopup();
+// });
 </script>
 
 <style scoped lang="scss">

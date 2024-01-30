@@ -1,5 +1,5 @@
-import {defineStore} from "pinia";
-import {Nullable} from "@/types";
+import { defineStore } from "pinia";
+import { Nullable } from "@/types";
 
 export enum PopupType {
 	addResident = "addResident",
@@ -14,17 +14,17 @@ interface IPopupState {
 }
 
 export const usePopupStore = defineStore("popup", {
-	state: (): IPopupState => ({
-		isVisiblePopup: false,
-		popupType: null,
-	}),
-	actions: {
-		showPopup(type: PopupType) {
-			this.isVisiblePopup = true;
-			this.popupType = type;
-		},
-		closePopup() {
-			this.isVisiblePopup = false;
-		}
-	}
+  state: (): IPopupState => ({
+    isVisiblePopup: false,
+    popupType: null,
+  }),
+  actions: {
+    showPopup(type: PopupType) {
+      this.isVisiblePopup = true;
+      this.popupType = type;
+    },
+    closePopup() {
+      this.isVisiblePopup = false;
+    }
+  }
 });

@@ -22,12 +22,12 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
-import {useResidentStore} from "@/store/resident.store";
-import {IHeader} from "@/types/tables.types";
-import {PopupType, usePopupStore} from "@/store/popup.store";
+import { onMounted, ref } from "vue";
+import { useResidentStore } from "@/store/resident.store";
+import { IHeader } from "@/types/tables.types";
+import { PopupType, usePopupStore } from "@/store/popup.store";
 import ResidentsTable from "@/components/widgets/ResidentsTable.vue";
-import {IResident} from "@/types/resident.types";
+import { IResident } from "@/types/resident.types";
 
 const residentsStore = useResidentStore();
 const popupStore = usePopupStore();
@@ -35,56 +35,56 @@ const popupStore = usePopupStore();
 const isDataLoading = ref<boolean>(true);
 
 const headers = ref<IHeader[]>([
-	{
-		title: "ID",
-		value: "id"
-	},
-	{
-		title: "ФИО",
-		value: "fio"
-	},
-	{
-		title: "Размер участка",
-		value: "area"
-	},
-	{
-		title: "С какого числа",
-		value: "startDate"
-	},
-	{
-		title: "Действия",
-		value: "actions"
-	},
+  {
+    title: "ID",
+    value: "id"
+  },
+  {
+    title: "ФИО",
+    value: "fio"
+  },
+  {
+    title: "Размер участка",
+    value: "area"
+  },
+  {
+    title: "С какого числа",
+    value: "startDate"
+  },
+  {
+    title: "Действия",
+    value: "actions"
+  },
 ]);
 
 const onAddResident = () => {
-	popupStore.showPopup(PopupType.addResident);
+  popupStore.showPopup(PopupType.addResident);
 };
 
 const onChangeTariffClick = () => {
-	popupStore.showPopup(PopupType.changeTariff);
+  popupStore.showPopup(PopupType.changeTariff);
 };
 
 const initResidents = async () => {
-	isDataLoading.value = true;
+  isDataLoading.value = true;
 
-	await residentsStore.fetchResidents();
+  await residentsStore.fetchResidents();
 
-	isDataLoading.value = false;
+  isDataLoading.value = false;
 };
 
 const onDeleteHandler = (resident: IResident) => {
-	popupStore.showPopup(PopupType.acceptDelete);
-	residentsStore.setCurrentResident(resident);
+  popupStore.showPopup(PopupType.acceptDelete);
+  residentsStore.setCurrentResident(resident);
 };
 
 const onEditHandler = (resident: IResident) => {
-	popupStore.showPopup(PopupType.addResident);
-	residentsStore.setCurrentResident(resident);
+  popupStore.showPopup(PopupType.addResident);
+  residentsStore.setCurrentResident(resident);
 };
 
 onMounted(async () => {
-	await initResidents();
+  await initResidents();
 });
 </script>
 

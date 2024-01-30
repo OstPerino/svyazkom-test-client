@@ -1,5 +1,5 @@
-import {IResident} from "@/types/resident.types";
-import {IPeriod} from "@/types/period.types";
+import { IResident } from "@/types/resident.types";
+import { IPeriod } from "@/types/period.types";
 
 export interface IBill {
 	id: number;
@@ -10,5 +10,5 @@ export interface IBill {
 	period: IPeriod;
 }
 
-export type ICreateBillDto = Omit<IBill, "amountRub" | "resident" | "period">;
+export type ICreateBillDto = Pick<IBill, "residentId">;
 export type IUpdateBillDto = Omit<IBill, "amountRub" | "resident" | "period">;

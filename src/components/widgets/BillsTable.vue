@@ -19,40 +19,40 @@
 </template>
 
 <script setup lang="ts">
-import {computed, PropType, ref} from "vue";
-import {IHeader} from "@/types/tables.types";
-import {useResidentStore} from "@/store/resident.store";
-import {IBill} from "@/types/bill.types";
+import { computed, PropType, ref } from "vue";
+import { IHeader } from "@/types/tables.types";
+import { useResidentStore } from "@/store/resident.store";
+import { IBill } from "@/types/bill.types";
 
 type IFormattedBill = Omit<IBill, "residentId" | "periodId">;
 
 const props = defineProps({
-	bills: {
-		type: Array as PropType<IBill[]>,
-		required: true,
-	},
-	headers: {
-		type: Array as PropType<IHeader[]>,
-		required: true,
-	},
-	loading: {
-		type: Boolean,
-		default: false,
-	}
+  bills: {
+    type: Array as PropType<IBill[]>,
+    required: true,
+  },
+  headers: {
+    type: Array as PropType<IHeader[]>,
+    required: true,
+  },
+  loading: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 const residentStore = useResidentStore();
 
 const formattedBills = computed(() => {
-	const removed: IFormattedBill[] = props.bills.map(({ residentId, periodId, ...rest }) => rest);
-	const formatted = removed.map((bill: IFormattedBill) => ({
-		...bill,
-		period: {
-			endDate: new Date(bill.period.endDate).toLocaleDateString(),
-			beginDate: new Date(bill.period.beginDate).toLocaleDateString(),
-		}
-	}));
-	return formatted;
+  const removed: IFormattedBill[] = props.bills.map(({ residentId, periodId, ...rest }) => rest);
+  const formatted = removed.map((bill: IFormattedBill) => ({
+    ...bill,
+    period: {
+      endDate: new Date(bill.period.endDate).toLocaleDateString(),
+      beginDate: new Date(bill.period.beginDate).toLocaleDateString(),
+    }
+  }));
+  return formatted;
 });
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="popup-wrapper" v-if="popupStore.isVisiblePopup">
+  <div class="popup-wrapper" v-if="popupStore.isVisiblePopup" @keydown.esc="popupStore.closePopup()">
     <div class="popup-container" ref="popupContainer">
       <!--  Popups are here  -->
       <resident-action-popup v-if="popupStore.popupType === PopupType.addResident" />
@@ -11,20 +11,13 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
-import {PopupType, usePopupStore} from "@/store/popup.store";
-import {onClickOutside} from "@vueuse/core";
+import { PopupType, usePopupStore } from "@/store/popup.store";
 import ResidentActionPopup from "@/components/layouts/ResidentCreatePopup.vue";
 import MakeSureDelete from "@/components/layouts/MakeSureDelete.vue";
 import ChangeTariffPopup from "@/components/layouts/ChangeTariffPopup.vue";
 import CreateBillPopup from "@/components/layouts/CreateBillPopup.vue";
 
 const popupStore = usePopupStore();
-const popupContainer = ref<null>(null);
-
-onClickOutside(popupContainer, (event: PointerEvent) => {
-	popupStore.closePopup();
-});
 </script>
 
 <style scoped lang="scss">

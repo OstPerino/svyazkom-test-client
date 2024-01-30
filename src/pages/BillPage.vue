@@ -16,57 +16,57 @@
 </template>
 
 <script setup lang="ts">
-import {IHeader} from "@/types/tables.types";
-import {onMounted, ref} from "vue";
-import {useBillStore} from "@/store/bill.store";
-import {PopupType, usePopupStore} from "@/store/popup.store";
+import { IHeader } from "@/types/tables.types";
+import { onMounted, ref } from "vue";
+import { useBillStore } from "@/store/bill.store";
+import { PopupType, usePopupStore } from "@/store/popup.store";
 import BillsTable from "@/components/widgets/BillsTable.vue";
 
 const loading = ref<boolean>(false);
 const headers = ref<IHeader[]>([
-	{
-		title: "ID",
-		value: "id"
-	},
-	{
-		title: "Сумма",
-		value: "amountRub"
-	},
-	{
-		title: "С какого числа",
-		value: "period.beginDate"
-	},
-	{
-		title: "По какое число",
-		value: "period.endDate"
-	},
-	{
-		title: "Дачник",
-		value: "resident.fio"
-	},
+  {
+    title: "ID",
+    value: "id"
+  },
+  {
+    title: "Сумма",
+    value: "amountRub"
+  },
+  {
+    title: "С какого числа",
+    value: "period.beginDate"
+  },
+  {
+    title: "По какое число",
+    value: "period.endDate"
+  },
+  {
+    title: "Дачник",
+    value: "resident.fio"
+  },
 ]);
 
 const billStore = useBillStore();
 const popupStore = usePopupStore();
 
 const onAddBill = () => {
-	popupStore.showPopup(PopupType.addBill);
+  popupStore.showPopup(PopupType.addBill);
 };
 
 const onChangeTariffClick = () => {
-	popupStore.showPopup(PopupType.changeTariff);
+  popupStore.showPopup(PopupType.changeTariff);
 };
 
 const initBills = async () => {
-	loading.value = true;
+  loading.value = true;
 
-	await billStore.fetchBills();
+  await billStore.fetchBills();
 
-	loading.value = false;
+  loading.value = false;
 };
 
 onMounted(async () => {
-	await initBills();
+  await initBills();
 });
 </script>
 

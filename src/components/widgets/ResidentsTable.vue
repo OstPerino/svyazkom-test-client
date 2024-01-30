@@ -35,53 +35,53 @@
 </template>
 
 <script setup lang="ts">
-import {computed, PropType, ref} from "vue";
-import {IResident} from "@/types/resident.types";
-import {IHeader} from "@/types/tables.types";
-import {useResidentStore} from "@/store/resident.store";
+import { computed, PropType, ref } from "vue";
+import { IResident } from "@/types/resident.types";
+import { IHeader } from "@/types/tables.types";
+import { useResidentStore } from "@/store/resident.store";
 
 const page = ref<number>(1);
 
 const emits = defineEmits([
-	"update:chooseResident",
-	"update:editResident",
-	"update:deleteResident",
+  "update:chooseResident",
+  "update:editResident",
+  "update:deleteResident",
 ]);
 
 const props = defineProps({
-	residents: {
-		type: Array as PropType<IResident[]>,
-		required: true,
-	},
-	headers: {
-		type: Array as PropType<IHeader[]>,
-		required: true,
-	},
-	loading: {
-		type: Boolean,
-		default: false,
-	}
+  residents: {
+    type: Array as PropType<IResident[]>,
+    required: true,
+  },
+  headers: {
+    type: Array as PropType<IHeader[]>,
+    required: true,
+  },
+  loading: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 const residentStore = useResidentStore();
 
 const formattedResidents = computed(() => {
-	return props.residents.map((resident) => ({
-		...resident,
-		startDate: new Date(resident.startDate).toLocaleDateString()
-	}));
+  return props.residents.map((resident) => ({
+    ...resident,
+    startDate: new Date(resident.startDate).toLocaleDateString()
+  }));
 });
 
 const onDelete = (resident: IResident) => {
-	emits("update:editResident", resident);
+  emits("update:editResident", resident);
 };
 
 const onEdit = (resident: IResident) => {
-	emits("update:deleteResident", resident);
+  emits("update:deleteResident", resident);
 };
 
 const chooseResident = (event: HTMLElement, resident: IResident) => {
-	emits("update:chooseResident", resident);
+  emits("update:chooseResident", resident);
 };
 </script>
 
