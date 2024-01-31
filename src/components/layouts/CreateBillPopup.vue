@@ -1,5 +1,5 @@
 <template>
-  <base-popup>
+  <BasePopup>
     <template #header>
       Добавить счет
     </template>
@@ -18,7 +18,7 @@
         Записать показания
       </v-btn>
     </template>
-  </base-popup>
+  </BasePopup>
 </template>
 
 <script setup lang="ts">

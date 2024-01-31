@@ -1,5 +1,5 @@
 <template>
-  <base-popup>
+  <BasePopup>
     <template #header>
       Изменить тариф
     </template>
@@ -20,7 +20,7 @@
         Изменить
       </v-btn>
     </template>
-  </base-popup>
+  </BasePopup>
 </template>
 
 <script setup lang="ts">

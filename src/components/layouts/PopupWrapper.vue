@@ -1,11 +1,11 @@
 <template>
-  <div class="popup-wrapper" v-if="popupStore.isVisiblePopup" @keydown.esc="popupStore.closePopup()">
+  <div class="popup-wrapper" v-if="popupStore.isVisiblePopup">
     <div class="popup-container" ref="popupContainer">
       <!--  Popups are here  -->
-      <resident-action-popup v-if="popupStore.popupType === PopupType.addResident" />
-      <make-sure-delete v-if="popupStore.popupType === PopupType.acceptDelete" />
-      <change-tariff-popup v-if="popupStore.popupType === PopupType.changeTariff" />
-      <create-bill-popup v-if="popupStore.popupType === PopupType.addBill" />
+      <ResidentActionPopup v-if="popupStore.popupType === PopupType.addResident" />
+      <MakeSureDelete v-if="popupStore.popupType === PopupType.acceptDelete" />
+      <ChangeTariffPopup v-if="popupStore.popupType === PopupType.changeTariff" />
+      <CreateBillPopup v-if="popupStore.popupType === PopupType.addBill" />
     </div>
   </div>
 </template>

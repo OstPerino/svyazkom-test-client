@@ -1,5 +1,5 @@
 <template>
-  <base-popup>
+  <BasePopup>
     <template #header>
       Уверены что хотите удалить?
     </template>
@@ -9,7 +9,7 @@
         <v-btn @click="popupStore.closePopup()">Нет</v-btn>
       </div>
     </template>
-  </base-popup>
+  </BasePopup>
 </template>
 
 <script setup lang="ts">

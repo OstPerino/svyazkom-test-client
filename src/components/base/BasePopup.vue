@@ -1,5 +1,5 @@
 <template>
-  <div class="base-popup" ref="popupContainer">
+  <div class="base-popup" ref="popupContainer" @keydown.esc="popupStore.closePopup()">
     <div class="base-popup-header">
       <h3 class="base-popup-header-text"><slot name="header"/></h3>
       <v-btn size="small" icon="$close" @click="onClose"/>

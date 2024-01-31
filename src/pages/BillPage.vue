@@ -11,7 +11,7 @@
         </v-btn>
       </div>
     </div>
-    <bills-table :headers="headers" :bills="billStore.bills" :loading="loading" />
+    <BillsTable :headers="headers" :bills="billStore.bills" :loading="loading" />
   </div>
 </template>
 
