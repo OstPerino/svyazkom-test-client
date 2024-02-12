@@ -22,6 +22,13 @@ export const useBillStore = defineStore("bill", {
       } catch (e: unknown) {
         return e;
       }
+    },
+    async record() {
+      try {
+        // await
+      } catch (e: unknown) {
+        return e;
+      }
     }
   }
 });

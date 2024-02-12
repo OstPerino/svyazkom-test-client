@@ -47,6 +47,7 @@ const formattedBills = computed(() => {
   const removed: IFormattedBill[] = props.bills.map(({ residentId, periodId, ...rest }) => rest);
   const formatted = removed.map((bill: IFormattedBill) => ({
     ...bill,
+    amountRub: parseFloat(bill.amountRub.toFixed(2)),
     period: {
       endDate: new Date(bill.period.endDate).toLocaleDateString(),
       beginDate: new Date(bill.period.beginDate).toLocaleDateString(),
